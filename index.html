@@ -1,0 +1,851 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Taller Estratégico Saber 11 - Grupo Edúcate Colombia</title>
+    <!-- Importar Fuente Barlow Condensed de Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        /* === CSS EMBEBIDO - Actualizado con Lineamientos Grupo Edúcate === */
+
+        /* Reset y Fuentes */
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
+        body {
+            font-family: 'Barlow Condensed', sans-serif; /* Fuente Corporativa */
+            line-height: 1.6; /* Ajustar según legibilidad de Barlow */
+            color: #333333; /* Un gris oscuro estándar para buena legibilidad */
+            background-color: #f8f9fa;
+            font-weight: 400; /* Peso base */
+        }
+
+        /* Colores Corporativos Grupo Edúcate */
+        :root {
+            --brand-dark-blue: #17334B;
+            --brand-teal: #54BBAB;
+            --brand-orange: #F39325; /* Naranja principal */
+            --brand-dark-orange: #D94D15; /* Naranja secundario/oscuro */
+            --brand-red: #B01829;
+            --brand-purple: #521537;
+            --brand-olive: #878721;
+            --brand-light-blue: #11678B; /* Otro azul secundario */
+
+            --neutral-black: #000000;
+            --neutral-white: #ffffff;
+            --neutral-gray: #cccccc; /* Ajustar gris según necesidad */
+
+            /* Aplicación a variables de tema */
+            --primary-color: var(--brand-teal); /* Teal como color primario de interacción */
+            --secondary-color: var(--brand-orange); /* Naranja como secundario */
+            --header-bg: var(--brand-dark-blue); /* Azul oscuro para header/footer */
+            --footer-bg: var(--brand-dark-blue);
+            --light-bg: var(--neutral-white);
+            --dark-text: #333333; /* Gris oscuro para texto principal */
+            --light-text: var(--neutral-white);
+            --placeholder-bg: #e9ecef;
+            --placeholder-border: #ced4da;
+            --link-color: var(--brand-light-blue); /* Azul secundario para enlaces */
+            --button-bg: var(--secondary-color);
+            --button-text: var(--light-text); /* Blanco sobre naranja */
+            --button-hover-bg: var(--primary-color);
+            --button-hover-text: var(--light-text); /* Blanco sobre teal */
+        }
+
+        /* Header y Navegación */
+        #main-header { background-color: var(--header-bg); color: var(--light-text); padding: 0.7rem 1rem; position: sticky; top: 0; z-index: 1000; width: 100%; box-shadow: 0 2px 5px rgba(0,0,0,0.1); display: flex; align-items: center; justify-content: space-between; /* Espacio para logo */ }
+
+        /* Placeholder para Logo en Header */
+        .header-logo-placeholder {
+             width: 120px; /* Ajustar tamaño según necesidad */
+             height: 40px; /* Ajustar tamaño según necesidad */
+             background-color: rgba(255,255,255,0.1); /* Temporal */
+             border: 1px dashed var(--light-text);
+             display: flex;
+             align-items: center;
+             justify-content: center;
+             font-size: 0.8rem;
+             font-weight: 300;
+             color: rgba(255,255,255,0.7);
+             margin-left: 15px;
+         }
+         /* Opcional: Si usas una imagen real */
+         /* .header-logo img { height: 40px; width: auto; } */
+
+        #main-header nav ul { list-style: none; display: flex; justify-content: center; align-items: center; flex-wrap: wrap; }
+        #main-header nav ul li { margin: 0.3rem 0.6rem; } /* Más juntos */
+        #main-header nav ul li a { color: var(--light-text); text-decoration: none; font-weight: 600; /* Barlow Condensed Bold */ padding: 0.5rem 0.9rem; border-radius: 5px; /* Esquinas menos redondeadas */ transition: background-color 0.3s ease, color 0.3s ease; font-size: 1rem; /* Ligeramente más grande con Barlow */ }
+        #main-header nav ul li a:hover, #main-header nav ul li a:focus { background-color: var(--button-bg); color: var(--button-text); outline: none; }
+
+        /* Estilos Generales Sección (Slide) */
+        .slide { padding: 50px 20px 90px 20px; margin-bottom: 0; background-color: var(--light-bg); border-bottom: 1px solid #dee2e6; position: relative; scroll-margin-top: 60px; /* Ajustar a altura real del header */ min-height: 50vh; }
+        .slide:last-of-type { border-bottom: none; }
+        .slide-content { max-width: 950px; margin: 0 auto; }
+
+        /* Placeholders Imágenes Sección */
+        .section-image-placeholder { background-color: var(--placeholder-bg); border: 2px dashed var(--placeholder-border); padding: 30px; margin: 0 auto 35px auto; border-radius: 8px; display: flex; align-items: center; justify-content: center; min-height: 180px; max-width: 750px; text-align: center; color: #6c757d; font-weight: 300; /* Barlow Light */ }
+
+        /* Títulos y Texto */
+        .slide h2 { color: var(--brand-dark-blue); margin-bottom: 30px; font-size: 2.4rem; text-align: center; font-weight: 700; /* Barlow Bold/ExtraBold */ }
+        .slide h3 { color: var(--secondary-color); margin-top: 35px; margin-bottom: 18px; font-size: 1.8rem; font-weight: 700; /* Barlow Bold */ border-bottom: 2px solid var(--secondary-color); padding-bottom: 6px; display: inline-block; }
+        .slide h4 { color: var(--primary-color); margin-top: 28px; margin-bottom: 12px; font-size: 1.4rem; font-weight: 600; /* Barlow SemiBold/Bold */ }
+        .slide p, .slide ul, .slide ol { margin-bottom: 16px; font-size: 1.1rem; /* Ajustar para Barlow */ color: var(--dark-text); font-weight: 400; /* Barlow Regular */ }
+        .slide ul, .slide ol { padding-left: 40px; }
+        .slide li { margin-bottom: 12px; }
+        .slide strong { font-weight: 700; /* Barlow Bold */ color: var(--brand-dark-blue); } /* Resaltar con azul oscuro */
+        .slide code { background-color: #fceae6; /* Fondo naranja muy claro */ padding: 3px 6px; border-radius: 4px; font-family: monospace; color: var(--brand-dark-orange); border: 1px solid #ffccb3; }
+
+        /* Columnas */
+        .column-container { display: flex; flex-wrap: wrap; gap: 25px; margin-top: 25px; }
+        .column { flex: 1; min-width: 280px; background-color: #e8f8f5; /* Verde azulado muy claro */ padding: 20px; border-radius: 8px; border: 1px solid var(--primary-color); /* Borde Teal */ }
+        .column h4 { margin-top: 0; color: var(--brand-dark-blue); font-size: 1.3rem; border-bottom: 1px solid var(--brand-dark-blue); padding-bottom: 5px; margin-bottom: 15px; font-weight: 600; }
+        .column ul { padding-left: 25px; font-size: 1rem; }
+        .column li { margin-bottom: 8px; }
+
+         /* Botones Área */
+        .area-buttons-container { text-align: center; margin-top: 45px; display: flex; flex-wrap: wrap; justify-content: center; gap: 18px; }
+        .area-button { display: inline-block; background-color: var(--button-bg); color: var(--button-text); padding: 14px 30px; border-radius: 8px; /* Menos redondeado */ text-decoration: none; font-weight: 700; /* Barlow Bold */ font-size: 1.1rem; transition: all 0.3s ease; border: none; cursor: pointer; box-shadow: 0 3px 6px rgba(0,0,0,0.1); }
+        .area-button:hover, .area-button:focus { background-color: var(--button-hover-bg); color: var(--button-hover-text); transform: translateY(-3px); box-shadow: 0 5px 10px rgba(0,0,0,0.2); outline: none; }
+
+        /* Botón Volver Inicio */
+        .back-to-top { display: inline-block; position: fixed; bottom: 25px; right: 25px; background-color: var(--secondary-color); color: var(--light-text); /* Blanco sobre naranja */ width: 50px; height: 50px; border-radius: 50%; text-decoration: none; font-size: 1.8rem; font-weight: 700; transition: all 0.3s ease; box-shadow: 0 4px 10px rgba(0,0,0,0.25); z-index: 999; display: flex; align-items: center; justify-content: center; }
+        .back-to-top:hover { background-color: var(--primary-color); transform: scale(1.1) translateY(-4px); box-shadow: 0 6px 14px rgba(0,0,0,0.3); }
+
+        /* Footer */
+        #main-footer { background-color: var(--footer-bg); color: #bdc3c7; text-align: center; padding: 30px 15px; margin-top: 0; font-size: 0.9rem; }
+        #main-footer p { margin-bottom: 8px; font-weight: 300; /* Barlow Light */ }
+        #main-footer strong { font-weight: 600; color: var(--light-text); } /* Resaltar autor */
+         /* Placeholder para Logo en Footer */
+         .footer-logo-placeholder {
+             width: 100px; /* Ajustar tamaño */
+             height: 35px; /* Ajustar tamaño */
+             background-color: rgba(255,255,255,0.1); /* Temporal */
+             border: 1px dashed rgba(255,255,255,0.5);
+             margin: 15px auto 10px auto;
+             display: flex;
+             align-items: center;
+             justify-content: center;
+             font-size: 0.7rem;
+             font-weight: 300;
+             color: rgba(255,255,255,0.6);
+         }
+
+
+        /* Estilos específicos bienvenida y cierre con nuevos colores */
+        .welcome-slide { background: linear-gradient(135deg, var(--brand-dark-blue) 0%, var(--brand-light-blue) 100%); }
+        .final-slide { background: linear-gradient(135deg, var(--brand-teal) 0%, var(--accent-color) 100%); text-align:center; }
+        .welcome-content-container, .final-slide .welcome-content-container { background-color: rgba(255, 255, 255, 0.1); padding: 40px; border-radius: 15px; backdrop-filter: blur(5px); max-width: 800px; margin: 0 auto; /* Centrar contenedor */ }
+        .welcome-slide h1, .final-slide h2 { color: var(--light-text); text-shadow: 1px 1px 3px rgba(0,0,0,0.3); }
+        .welcome-slide h2, .final-slide p { color: rgba(255, 255, 255, 0.9); }
+        .welcome-image-placeholder p, .final-slide p { color: rgba(255, 255, 255, 0.8); }
+
+
+        /* Responsividad */
+        @media (max-width: 768px) {
+            #main-header { flex-direction: column; padding: 0.5rem 1rem;}
+            .header-logo-placeholder { margin: 5px auto; }
+            #main-header nav ul { margin-top: 5px; }
+            #main-header nav ul li { margin: 0.2rem 0.3rem; }
+            #main-header nav ul li a { padding: 0.4rem 0.7rem; font-size: 0.8rem; }
+            .slide h2 { font-size: 1.8rem; }
+            .slide h3 { font-size: 1.4rem; }
+            .slide h4 { font-size: 1.1rem; }
+            .slide { padding: 40px 10px 70px 10px; min-height: auto; }
+            .back-to-top { width: 45px; height: 45px; font-size: 1.5rem; bottom: 15px; right: 15px; }
+            .column-container { flex-direction: column; }
+            .area-buttons-container { flex-direction: column; align-items: center; }
+            .area-button { width: 90%; margin-bottom: 12px; padding: 12px 20px; font-size: 1rem;}
+             .welcome-content-container, .final-slide .welcome-content-container { padding: 25px;}
+              .welcome-slide h1 { font-size: 2rem; }
+              .final-slide h2 { font-size: 2rem; }
+              .welcome-slide h2, .final-slide p { font-size: 1.1rem; }
+        }
+         @media (max-width: 480px) {
+              .welcome-slide h1 { font-size: 1.6rem; }
+              .welcome-slide h2 { font-size: 1rem; }
+               .slide h2 { font-size: 1.5rem; }
+               .slide h3 { font-size: 1.2rem; }
+               .slide p, .slide ul, .slide ol { font-size: 0.95rem;}
+         }
+
+    </style>
+</head>
+<body>
+    <header id="main-header">
+         <!-- *** SUGERENCIA: Coloca aquí el LOGO oficial de Grupo Edúcate Colombia *** -->
+         <div class="header-logo-placeholder">(Logo Grupo Edúcate)</div>
+        <nav>
+            <ul>
+                <li><a href="#inicio">Inicio</a></li>
+                <li><a href="#fase-preparacion">Contexto Saber 11</a></li>
+                <li><a href="#fase-ruta">La Ruta Maestra</a></li>
+                <li><a href="#fase-exploracion">¡A Explorar!</a></li>
+                <li><a href="#fase-socializacion">Compartir</a></li>
+                <li><a href="#fase-ingles">Inglés: Tips</a></li>
+                <li><a href="#la-meta">La Meta</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <!-- === SECCIÓN INICIO === -->
+        <section id="inicio" class="slide welcome-slide">
+            <div class="welcome-content-container">
+                <div class="welcome-image-placeholder">
+                     <p></p>
+                </div>
+                 <h1>¡Domina Saber 11!</h1>
+                 <h2>Tu Ruta Inteligente Paso a Paso</h2>
+                 <div class="intro-text">
+                    <p>Un taller interactivo para potenciar tus habilidades y enfrentar la prueba con <strong>nuevas estrategias</strong>.</p>
+                 </div>
+            </div>
+        </section>
+
+        <!-- === FASE 1: Preparación (Contexto) === -->
+        <section id="fase-preparacion" class="slide">
+            <div class="slide-content">
+                <div class="section-image-placeholder">
+                    <p>(Imagen: Mapa conceptual simple de la estructura de Saber 11 o similar)</p>
+                </div>
+                <h2>¡Preparados, Listos...! Contexto Saber 11</h2>
+
+                <h3>El Mapa del Examen (¡Para que no te pierdas!)</h3>
+                <div class="column-container">
+                    <div class="column">
+                        <h4>SESIÓN 1 (Mañana - 4h 30min)</h4>
+                        <ul>
+                            <li>Matemáticas: 25 preguntas</li>
+                            <li>Lectura Crítica: 41 preguntas</li>
+                            <li>Sociales y Ciudadanas: 25 preguntas</li>
+                            <li>Ciencias Naturales: 29 preguntas</li>
+                            <li><strong>TOTAL SESIÓN 1: 120 preguntas</strong></li>
+                        </ul>
+                    </div>
+                    <div class="column">
+                        <h4>SESIÓN 2 (Tarde - 4h 30min)</h4>
+                         <ul>
+                            <li>Sociales y Ciudadanas: 25 preguntas</li>
+                            <li>Matemáticas: 25 preguntas</li>
+                            <li>Ciencias Naturales: 29 preguntas</li>
+                            <li>Inglés: 55 preguntas</li>
+                            <li><strong>TOTAL SESIÓN 2: 134 preguntas</strong></li>
+                        </ul>
+                    </div>
+                </div>
+                 <p style="text-align:center; margin-top:15px; font-size:0.9rem;"><em>Nota: Existe un Cuestionario Socioeconómico adicional que NO afecta tu puntaje académico.</em></p>
+
+                <h3>La Clave: ¡No es Memoria, es SABER HACER!</h3>
+                <p>El ICFES evalúa tus <strong>Competencias</strong>: Habilidades para PENSAR y APLICAR conocimientos en situaciones diversas. Buscan <strong>Evidencia</strong> de esas habilidades en cómo resuelves.</p>
+
+                <h3>El Formato: Selección Múltiple Única Respuesta</h3>
+                 <p>Recuerda la estructura:</p>
+                <ul>
+                    <li><strong>Contexto:</strong> Texto, gráfico, tabla... (¡Aquí están las pistas!).</li>
+                    <li><strong>Pregunta:</strong> La misión específica (¡Léela con lupa!).</li>
+                    <li><strong>Opciones (A, B, C, D):</strong> Solo UNA es la correcta ✅.</li>
+                    <li><strong>Distractores:</strong> ¡Las otras 3! 👻 Parecen buenas, pero tienen "trampas". ¡Aprenderemos a detectarlas!</li>
+                </ul>
+                 <a href="#inicio" class="back-to-top" title="Volver al Inicio">↑</a>
+            </div>
+        </section>
+
+        <!-- === FASE 2: Presentación de la Ruta Maestra === -->
+        <section id="fase-ruta" class="slide">
+             <div class="slide-content">
+                 <div class="section-image-placeholder">
+                    <p>(Imagen: Gráfico limpio y moderno de los 4 Pasos de la Ruta)</p>
+                 </div>
+                <h2>La Herramienta Clave: ¡La Ruta Maestra de 4 Pasos! 🧭</h2>
+                <p>Para enfrentar cualquier pregunta (Mat, LC, Soc, C.Nat) de forma organizada y efectiva, sigue estos pasos:</p>
+                <ol>
+                    <li><strong>PASO 1: ENTENDER EL RETO (Decodificación / Inmersión)</strong><br>
+                        Comprender a fondo la información del contexto y la tarea específica que te pide la pregunta. <em>¿Qué me dan? ¿Qué me piden?</em></li>
+                    <li><strong>PASO 2: CONECTAR Y PLANEAR (Conexión / Estrategia)</strong><br>
+                        Activar tus conocimientos previos relevantes y seleccionar el mejor plan o estrategia para abordar la pregunta. <em>¿Qué sé de esto? ¿Cómo lo resuelvo?</em></li>
+                    <li><strong>PASO 3: EJECUTAR Y EVALUAR (Ejecución / Análisis)</strong><br>
+                        Aplicar tu plan (resolver, analizar, inferir) y evaluar críticamente CADA opción de respuesta, identificando y descartando los distractores. <em>¡A resolver! ¿Por qué esta opción SÍ/NO?</em></li>
+                    <li><strong>PASO 4: ASEGURAR Y ELEGIR (Validación / Selección)</strong><br>
+                        Verificar que tu respuesta sea coherente, precisa, completa y responda exactamente a la pregunta. Seleccionar la MEJOR opción con confianza. <em>¿Es la mejor? ¡Marcar!</em></li>
+                 </ol>
+                 <p>¡Esta ruta te dará claridad, precisión y te ayudará a manejar mejor el tiempo!</p>
+                 <a href="#inicio" class="back-to-top" title="Volver al Inicio">↑</a>
+            </div>
+        </section>
+
+        <!-- === FASE 3: ¡A Explorar y Aplicar! (Botones) === -->
+        <section id="fase-exploracion" class="slide">
+            <div class="slide-content">
+                 <div class="section-image-placeholder">
+                    <p>(Imagen: Estudiantes colaborando, iconos de herramientas o exploración)</p>
+                 </div>
+                <h2>¡Manos a la Obra! Explora tu Ruta por Área 🛠️</h2>
+                <p>¡Ahora es su turno de ser los expertos! Vamos a trabajar en grupos para dominar la ruta en cada área. Hagan clic en el área que les corresponda (o sigan las indicaciones del facilitador):</p>
+                <div class="area-buttons-container">
+                    <a href="#area-lc" class="area-button">Lectura Crítica</a>
+                    <a href="#area-mat" class="area-button">Matemáticas</a>
+                    <a href="#area-soc" class="area-button">Sociales y Ciudadanas</a>
+                    <a href="#area-cnat" class="area-button">Ciencias Naturales</a>
+                    <a href="#fase-ingles" class="area-button">Inglés (¡Tips!)</a>
+                </div>
+                 <a href="#inicio" class="back-to-top" title="Volver al Inicio">↑</a>
+            </div>
+        </section>
+
+         <!-- === CONTENEDORES PARA CADA ÁREA (SE LLENARÁN EN LA ENTREGA 2) === -->
+         <section id="area-lc" class="slide"> <div class="slide-content"> <div class="section-image-placeholder"><p>(Imagen Lectura Crítica)</p></div>                  <h2>Área: Lectura Crítica 🧐</h2>
+                 <p>Aquí aplicaremos la <strong>Ruta del Lector Crítico</strong>. ¡Vamos a analizar textos y preguntas a fondo!</p>
+
+                 <h3>La Ruta del Lector Crítico: 4 Pasos</h3>
+                 <ol>
+                    <li><strong>PASO 1: INMERSIÓN (Entender Texto y Tarea)</strong><br> Leer activamente el texto (idea general, tipo) y la pregunta (verbo clave, objeto).</li>
+                    <li><strong>PASO 2: CONEXIÓN (Vincular Pregunta, Texto y Competencia)</strong><br> Localizar pistas en el texto. Identificar qué habilidad lectora se necesita (identificar, comprender, evaluar).</li>
+                    <li><strong>PASO 3: EVALUACIÓN (Analizar Opciones y Distractores)</strong><br> Leer CADA opción. Verificar si responde exactamente. Buscar sustento en el texto. Identificar y descartar distractores (errores, info irrelevante, exageraciones).</li>
+                    <li><strong>PASO 4: JUSTIFICACIÓN Y SELECCIÓN (Validar y Elegir)</strong><br> Comparar finalistas (si hay duda). Asegurar coherencia. Elegir la MEJOR respuesta (la más precisa, completa y sustentada).</li>
+                 </ol>
+
+                 <hr style="margin: 30px 0; border: 0; border-top: 1px solid #ccc;">
+
+                 <h3>1. Modelado: Aplicando la Ruta Paso a Paso</h3>
+                 <p>Veamos cómo usar la ruta con un ejemplo concreto:</p>
+                 <div class="example-question-container">
+                     <h4>Desde principios de la década de 1960 hasta aproximadamente 1980, la República de Sudáfrica aplicó uno de los sistemas de censura más exhaustivos del mundo. Dicho sistema trataba de controlar la propagación de signos en cualquiera de sus formas. No solo los libros, las revistas, las películas y las obras teatrales, sino también las camisetas, los llaveros, las muñecas, los juguetes y los letreros de las tiendas - en realidad, cualquier cosa portadora de un mensaje que pudiera ser "indeseable" - tenían que someterse al análisis de los censores antes de poder hacerse públicos. En la Unión Soviética había unas setenta mil personas que supervisaban las actividades de unos siete mil escritores. Sin embargo, la proporción entre censores y escritores en Sudáfrica era, en todo caso, superior a diez a uno. Los paranoicos se comportan como si el ambiente estuviera repleto de mensajes codificados. Durante décadas, el Estado sudafricano vivió inmerso en un estado de paranoia. La paranoia es la enfermedad de los gobiernos inseguros, en particular, de las dictaduras. Uno de los rasgos distintivos de las dictaduras modernas respecto a las anteriores ha sido la amplitud y la rapidez con que la paranoia puede extenderse. Pero Sudáfrica y la Unión Soviética no eran casos únicos, Reinaldo Arenas escribió sobre la existencia en Cuba de un ambiente de "amenaza oficial" que hacía del ciudadano "no solo una persona objeto de represión, sino también autorreprimida, no solo una persona censurada, sino autocensurada, no solo vigilada, sino que se vigila a sí misma".</h4>
+                     <p class="question-text"><strong>Contexto:</strong>                        Tomado y adaptado de: Coetzee J.M. (2014). Contra la censura. Ensayo sobre la pasión por silenciar, pp. 54-55 Bogotá, D.C.
+                     </p>
+                     <p><strong>Pregunta:</strong></p>
+                     <p><strong>30. Considere el siguiente fragmento del texto:</strong><br>
+                        "No solo los libros, las revistas, las películas y las obras teatrales, sino también las camisetas, los llaveros, las muñecas, los juguetes y los letreros de las tiendas - en realidad, cualquier cosa portadora de un mensaje que pudiera ser "indeseable" - tenían que someterse al análisis de los censores antes de poder hacerse públicos".</p>
+                     <p><strong>¿Cuál es la función que cumple este fragmento en el primer párrafo?</strong></p>
+                     <ol class="options">
+                        <li>Exponer la tesis central del texto según la cual las personas no son solo censuradas sino también autocensuradas.</li>
+                        <li><strong>Mostrar ejemplos para ilustrar por qué la paranoia es uno de los rasgos más distintivos de las dictaduras modernas.</strong> ✅</li>
+                        <li>Mostrar ejemplos que ilustren por qué el sistema de censura sudafricano fue uno de los más severos del mundo.</li>
+                        <li>Exponer la tesis central del texto según la cual la paranoia es la enfermedad de los gobiernos inseguros.</li>
+                     </ol>
+                     <h4>Aplicando la Ruta del Lector Crítico:</h4>
+                     <ol>
+                         <li><strong>PASO 1 (Inmersión):</strong> El fragmento lista muchos objetos cotidianos sujetos a censura. La pregunta pide la FUNCIÓN de este fragmento DENTRO del primer párrafo del texto completo (que hablaba de paranoia y dictaduras).</li>
+                         <li><strong>PASO 2 (Conexión):</strong> Necesito recordar la idea principal del primer párrafo (paranoia como rasgo de dictaduras) y ver cómo esta lista de ejemplos se conecta con esa idea. Habilidad: Comprender la función de una parte del texto en relación al todo.</li>
+                         <li><strong>PASO 3 (Evaluación):</strong>
+                             <ul>
+                                 <li>A: El fragmento habla de censura externa, no de autocensura ni de la tesis central completa. DESCARTADA.</li>
+                                 <li>B: El primer párrafo introduce la paranoia en dictaduras. Esta lista tan extensa y detallada de objetos censurables (incluso juguetes) ilustra perfectamente esa paranoia extrema. POSIBLE.</li>
+                                 <li>C: Aunque el texto menciona Sudáfrica, este fragmento no se enfoca *solo* en Sudáfrica, y no permite concluir que fue "uno de los más severos" solo con esta lista. DESCARTADA.</li>
+                                 <li>D: Similar a A, este fragmento es un ejemplo, no la tesis central sobre paranoia y gobiernos. DESCARTADA.</li>
+                             </ul>
+                         </li>
+                         <li><strong>PASO 4 (Justificación/Selección):</strong> La opción B es la que mejor explica la función de la lista: ejemplificar la paranoia mencionada antes en el párrafo. Es la conexión lógica más fuerte. ¡Elijo B!</li>
+                     </ol>
+                 </div>
+
+                 <hr style="margin: 30px 0; border: 0; border-top: 1px solid #ccc;">
+
+                 <h3>2. Práctica Guiada: ¡Inténtalo tú con ayuda!</h3>
+                 <p>Ahora, aplica la ruta a esta pregunta. Te damos una guía inicial:</p>
+                 <div class="example-question-container">
+                     <h4>Pregunta Guiada (Tomada de ICFES 2024 - Pregunta 41, Sesión 1)</h4>
+                     <p class="question-text"><strong>Contexto:</strong><br>
+                       Permítaseme detenerme un momento en una novela que ha hecho soñar a varias generaciones de lectores. Pienso en "Cien años de soledad" de Gabriel García Márquez. Quizá sea posible reencontrar en la lúcida locura de Aureliano Buendía la fecunda inutilidad de la literatura. Encerrado en su taller secreto, el coronel revolucionario fabrica pescaditos de oro a cambio de monedas de oro que después se funden para producir de nuevo otros pescaditos. Círculo vicioso que no escapa a las críticas de Úrsula, a la mirada afectuosa de la madre que se preocupa por el futuro del hijo:
+Con su terrible sentido práctico, ella [Úrsula] no podía entender el negocio del coronel, que cambiaba los pescaditos por monedas de oro, y luego convertía las monedas de oro en pescaditos, y así sucesivamente, de modo que tenía que trabajar cada vez más a medida que más vendía, para satisfacer un círculo vicioso exasperante. En verdad lo que le interesaba a él no era el negocio sino el trabajo (p. 184).
+Por lo demás, el coronel mismo confiesa que <<sus únicos instantes felices, desde la tarde remota en que su padre lo llevó a conocer el hielo, habían transcurrido en el taller de platería, donde se le iba el tiempo armando pescaditos de oro>>:
+Había tenido que promover treinta y dos guerras-sigue aclarando García Márquez-, y había tenido que violar todos sus pactos con la muerte y revolcarse como un cerdo en el muladar de la gloria, para descubrir con casi cuarenta años de retraso los privilegios de la simplicidad (p. 158).
+Es probable que el acto creativo que da vida a lo que denominamos literatura se base precisamente en esta simplicidad, motivada tan solo por un auténtico gozo y ajena a cualquier aspiración al beneficio. Un acto gratuito, exento de finalidad precisa. Capaz de eludir cualquier lógica comercial. Inútil, por lo tanto, porque no puede ser monetizado. Pero necesario para expresar con su misma existencia un valor alternativo a la supremacía de las leyes del mercado y el lucro.
+Tomado de: Ordine, N. (2013). La utilidad de lo inútil, p 30. Madrid, Acantilada.
+                     </p>
+                      <p><strong>Pregunta:</strong></p>
+                     <p><strong>41. La tesis central del texto se encuentra enunciada en</strong></p>
+                     <ol class="options">
+                        <li>A. El primer párrafo.</li>
+                        <li>B. El segundo párrafo.</li>
+                        <li>C. El último párrafo.</li>
+                        <li>D. El penúltimo.</li>
+                     </ol>
+                      <div style="border: 2px solid var(--accent-color); padding: 10px; margin-top:15px; border-radius: 5px; background-color: #e6ffed;">
+                         <strong>Respuesta Correcta Estará Aquí:</strong> [ ] <!-- Placeholder Visual -->
+                     </div>
+                     <h4>Aplicando la Ruta (¡Tu turno!):</h4>
+                     <p class="prompt"><strong>Paso 1 (Inmersión):</strong> Lee la pregunta. ¿Qué te pide identificar exactamente? (La ubicación de la tesis central).</p>
+                     <p class="prompt"><strong>Paso 2 (Conexión/Plan):</strong> ¿Qué es una tesis central? (La idea principal que defiende el autor). ¿Dónde suele ubicarse en un texto argumentativo corto como este? ¿Cuál crees que es la idea principal que el autor quiere transmitir sobre la "utilidad de lo inútil" usando el ejemplo del Coronel? Tu plan será releer cada párrafo buscando esa idea principal.</p>
+                     <p class="prompt"><strong>Paso 3 (Ejecutar/Evaluar):</strong> Ahora, lee cada párrafo y evalúa si contiene la tesis central. Luego, analiza las opciones A, B, C, D. ¿Cuál opción corresponde al párrafo donde encontraste la tesis? Descarta las otras.</p>
+                     <p class="prompt"><strong>Paso 4 (Asegurar/Elegir):</strong> Confirma tu elección. ¿Estás seguro de que ESA es la idea principal y está en ESE párrafo? ¡Marca tu respuesta!</p>
+                 </div>
+
+                 <hr style="margin: 30px 0; border: 0; border-top: 1px solid #ccc;">
+
+                 <h3>3. Práctica Independiente: ¡Ahora tú solo!</h3>
+                 <p>Aplica la Ruta del Lector Crítico completa para resolver esta pregunta:</p>
+                  <div class="example-question-container">
+                     <h4>Pregunta Independiente (Tomada de ICFES 2024 - Pregunta 54, Sesión 1)</h4>
+                     <p class="question-text"><strong>Contexto:</strong><br>
+                       Cuidado con lo que yo llamo feminismo Light. Es la idea de la igualdad femenina condicional. Recházala de plano, por favor. Es una idea vacua, fallida y tranquilizadora. Ser feminista es como estar embarazada. Lo estás o no lo estás. O crees en la plena igualdad entre hombres y mujeres o no. El feminismo Light emplea analogías como "él es la cabeza y tú el cuello". O "él conduce, pero tú viajas en el asiento delantero". Aún más preocupante es que dentro del feminismo Light está la idea de que los hombres son superiores por naturaleza, pero deben "tratar bien" a las mujeres. No. No. No.
+El bienestar de una mujer debe basarse en algo más que la benevolencia masculina. El feminismo Light recurre al lenguaje de la "permisión". Theresa May es la primera ministra británica y un diario progresista de su país describía así a su marido: "Philip May es conocido en la política por ser un hombre que ha dado un paso atrás para permitir que sea su mujer, Theresa, quien brille". Permitir. Démoste la vuelta. Theresa May ha permitido a su marido brillar ¿Tiene sentido? Si, Philip May fuera primer ministro quizá oiríamos que su esposa le ha "apoyado desde un segundo plano o que está "detrás de él" o "a su lado". Pero jamás que le ha <<permitido>> brillar [...] La triste verdad es que nuestro mundo está repleto de hombres y mujeres a quienes les gustan las mujeres poderosas. Nos han condicionado tanto con que el poder es masculino, que una mujer poderosa nos parece una aberración. Y como tal la vigilan. De una mujer poderosa nos preguntamos: ¿Es humilde? ¿Sonríe? ¿Es lo bastante agradecida? ¿Tiene también su lado doméstico? Preguntas que no nos planteamos de los hombres poderosos, lo cual prueba que no nos incomoda el poder en sí, sino las mujeres. Juzgamos más duramente a las mujeres poderosas que a los hombres poderosos. Y el feminismo Light lo hace posible.
+Ngozi Adichie, Ch. (2017). Querida Ijeawele. Cómo educar en el feminismo. Colombia: Literatura Random House.<br>
+                        Ngozi Adichie, Ch. (2017). Querida Ijeawele. Cómo educar en el feminismo. Colombia: Literatura Random House
+                     </p>
+                     <p><strong>Pregunta:</strong></p>
+                     <p><strong>54. El enunciado "ser feminista es como estar embarazada" quiere decir que</strong></p>
+                     <ol class="options">
+                        <li>A. No hay un término medio entre ser o no ser feminista.</li>
+                        <li>B. Las mujeres embarazadas pueden ser feministas.</li>
+                        <li>C. Ser feminista implica estar en posición embarazosa.</li>
+                        <li>D. Una mujer feminista solo si está embarazada.</li>
+                     </ol>
+                     <p class="prompt"><strong>¡Aplica los 4 pasos de la Ruta!</strong> Analiza el contexto de la frase en el texto, conecta con la idea principal del feminismo que presenta la autora, evalúa cada opción y elige la mejor.</p>
+                      <!-- No se muestra la respuesta correcta aquí -->
+                 </div>
+
+                 <a href="#inicio" class="back-to-top" title="Volver al Inicio">↑</a>
+             </div>
+         
+         <section id="area-mat" class="slide"> <div class="slide-content"> <div class="section-image-placeholder"><p>(Imagen Matemáticas)</p></div> </section>           
+                 <h2>Área: Matemáticas 📐</h2>
+                 <p>¡A resolver problemas con lógica y precisión usando la <strong>Ruta del Razonamiento Matemático!</strong></p>
+
+                 <h3>La Ruta Matemática: 4 Pasos</h3>
+                 <ol>
+                    <li><strong>PASO 1: DECONSTRUCCIÓN (Entender Problema y Datos)</strong><br> Leer atentamente. Visualizar (gráficos, figuras). Identificar contexto, pregunta/objetivo, datos clave (números, unidades, condiciones).</li>
+                    <li><strong>PASO 2: ESTRATEGIA Y MODELACIÓN (Planificar la Solución)</strong><br> Conectar con conceptos/fórmulas. Diseñar un plan/modelo (ecuación, gráfico, pasos). Anticipar pasos.</li>
+                    <li><strong>PASO 3: EJECUCIÓN Y CÁLCULO (Realizar Operaciones)</strong><br> Realizar cálculos (aritméticos, algebraicos, etc.) de forma precisa y ordenada. Manejar unidades. Verificar cálculos intermedios.</li>
+                    <li><strong>PASO 4: VALIDACIÓN Y SELECCIÓN (Comprobar y Elegir)</strong><br> Evaluar razonabilidad (¿Tiene sentido el resultado?). Verificar con las opciones. Analizar distractores (errores comunes). Seleccionar y justificar.</li>
+                 </ol>
+
+                 <hr style="margin: 30px 0; border: 0; border-top: 1px solid #ccc;">
+
+                <h3>1. Modelado: Aplicando la Ruta Paso a Paso</h3>
+                 <p>Veamos cómo usar la ruta matemática:</p>
+                 <div class="example-question-container">
+                     <h4>Pregunta Modelo (Tomada de ICFES 2024 - Pregunta 9, Sesión 1)</h4>
+                      <p class="question-text"><strong>Contexto:</strong></p>
+                     <p>9. Una agencia de viajes utiliza la siguiente fórmula para calcular el costo de un tiquete de avión:</p>
+                     <p style="text-align: center;"><code>T = ( (1/e) + m + s² ) * k</code></p>
+                     <p>Donde:</p>
+                     <ul>
+                         <li><code>T</code> es el costo total del pasaje.</li>
+                         <li><code>e</code> es el número de escalas de vuelo.</li>
+                         <li><code>m</code> el número de maletas que llevará el pasajero.</li>
+                         <li><code>s</code> el número de días que durará el viaje.</li>
+                         <li><code>k</code> es un valor fijo por cada aerolínea.</li>
+                     </ul>
+                     <p>Isabella, cliente de la agencia, hará un viaje para el cual lleva 5 maletas, prefiere hacer solamente una escala y estará dos semanas en el sitio de llegada. ¿Qué información le falta conocer a Isabella para calcular el costo de su pasaje?</p>
+                     <ol class="options">
+                        <li>A. El valor de e, es decir, el número posible de escalas.</li>
+                        <li>B. La cantidad de m de maletas que puede llevar.</li>
+                        <li>C. El número s de días que durará su viaje.</li>
+                        <li><strong>D. El valor de k fijado por cada aerolínea.</strong> ✅</li>
+                     </ol>
+                     <h4>Aplicando la Ruta Matemática:</h4>
+                     <ol>
+                        <li><strong>PASO 1 (Deconstrucción):</strong> Me dan una fórmula para T (costo). Me dan los valores de Isabella: m=5 maletas, e=1 escala, s=dos semanas. La pregunta es: ¿Qué información FALTA para calcular T?</li>
+                        <li><strong>PASO 2 (Estrategia):</strong> Mi plan es revisar la fórmula y los datos que tengo. Identificaré qué variable de la fórmula no tiene un valor conocido con la información de Isabella.</li>
+                        <li><strong>PASO 3 (Ejecución):</strong>
+                            <ul>
+                                <li>Tengo <code>e = 1</code>.</li>
+                                <li>Tengo <code>m = 5</code>.</li>
+                                <li>Tengo <code>s = 2 semanas</code>. ¡Ojo! La fórmula usa 's' como número de DÍAS. Necesito convertir: 2 semanas = 14 días. Entonces, <code>s = 14</code>.</li>
+                                <li>Reviso la fórmula: <code>T = ( (1/1) + 5 + 14² ) * k</code>. Conozco e, m, s. Me falta el valor de <code>k</code>.</li>
+                                <li>Evalúo opciones: A (tengo e), B (tengo m), C (tengo s en días), D (me falta k).</li>
+                             </ul>
+                        </li>
+                        <li><strong>PASO 4 (Validación):</strong> La única variable desconocida es 'k', el valor fijo por aerolínea. Por lo tanto, esa es la información que falta. ¡Elijo D!</li>
+                     </ol>
+                 </div>
+
+                 <hr style="margin: 30px 0; border: 0; border-top: 1px solid #ccc;">
+
+                <h3>2. Práctica Guiada: ¡Inténtalo tú con ayuda!</h3>
+                 <p>Aplica la ruta a esta pregunta. Te damos una guía inicial:</p>
+                 <div class="example-question-container">
+                     <h4>Pregunta Guiada (Tomada de ICFES 2024 - Pregunta 17, Sesión 1)</h4>
+                      <p class="question-text"><strong>Contexto:</strong></p>
+                     <p>17. Una empresa de compra y venta de mercancía vende regularmente 40 piezas por un precio unitario de $30. Cuando se venden más de 40, y menos de 80 piezas, se usa el siguiente procedimiento para determinar el porcentaje correspondiente a las ventas por encima de la cantidad regular:</p>
+                     <ul>
+                         <li><strong>Paso 1.</strong> Calcular el valor regular de las ventas; precio unitario multiplicado por 40, que es la cantidad de piezas vendidas regularmente.</li>
+                         <li><strong>Paso 2.</strong> Calcular el valor de ventas adicionales; el total de piezas vendidas menos 40 y este resultado multiplicado por $30, que es el precio unitario.</li>
+                         <li><strong>Paso 3.</strong> Dividir el resultado del paso 2 entre el resultado del paso 1.</li>
+                     </ul>
+                     <p><strong>Pregunta:</strong></p>
+                     <p><strong>¿Qué características tienen los resultados que se pueden obtener al usar este procedimiento?</strong></p>
+                     <ol class="options">
+                        <li>A. Son valores negativos.</li>
+                        <li>B. Son valores mayores que 1.200.</li>
+                        <li>C. Son valores entre 0 y 1.</li>
+                        <li>D. Son valores entre 1 y 40.</li>
+                     </ol>
+                      <div style="border: 2px solid var(--accent-color); padding: 10px; margin-top:15px; border-radius: 5px; background-color: #e6ffed;">
+                         <strong>Respuesta Correcta Estará Aquí:</strong> [ ] <!-- Placeholder Visual -->
+                     </div>
+                     <h4>Aplicando la Ruta (¡Tu turno!):</h4>
+                     <p class="prompt"><strong>Paso 1 (Deconstrucción):</strong> Entiende el procedimiento. Paso 1= Valor regular (40*30=1200). Paso 2= Valor adicional ((Piezas>40) - 40) * 30. Paso 3= Resultado = (Paso 2) / (Paso 1). La pregunta pide las CARACTERÍSTICAS del RESULTADO (Paso 3).</p>
+                     <p class="prompt"><strong>Paso 2 (Estrategia):</strong> Analizar la fórmula del Paso 3: Resultado = [((Piezas - 40) * 30) / (40 * 30)]. ¿Se puede simplificar? ¿Qué pasa si el número de piezas varía entre 41 y 79 (más de 40 y menos de 80)? Mi plan es analizar el rango de valores que puede tomar el resultado.</p>
+                     <p class="prompt"><strong>Paso 3 (Ejecutar/Evaluar):</strong> Simplifica la fórmula: Resultado = (Piezas - 40) / 40. Ahora, prueba valores límite: Si Piezas=41, Resultado = (41-40)/40 = 1/40. Si Piezas=79, Resultado = (79-40)/40 = 39/40. ¿En qué rango están estos valores? ¿Pueden ser negativos? ¿Mayores que 1? Evalúa las opciones A, B, C, D.</p>
+                     <p class="prompt"><strong>Paso 4 (Asegurar/Elegir):</strong> Confirma tu análisis del rango. ¿Qué opción describe correctamente los posibles valores del resultado? ¡Marca tu respuesta!</p>
+                 </div>
+
+                 <hr style="margin: 30px 0; border: 0; border-top: 1px solid #ccc;">
+
+                 <h3>3. Práctica Independiente: ¡Ahora tú solo!</h3>
+                 <p>Aplica la Ruta Matemática completa para resolver esta pregunta:</p>
+                  <div class="example-question-container">
+                     <h4>Pregunta Independiente (Tomada de ICFES 2024 - Pregunta 25, Sesión 1)</h4>
+                      <p class="question-text"><strong>Contexto:</strong></p>
+                      <img src="triangulo_pregunta25.png" alt="Triángulo sombreado con dimensiones" style="max-width: 300px; display: block; margin: 10px auto;">
+                     <p><strong>Pregunta:</strong></p>
+                     <p><strong>25. Se necesita encontrar el área del triángulo sombreado: ¿Cuál es el área del triángulo?</strong></p>
+                     <ol class="options">
+                        <li>A. 15 m²</li>
+                        <li>B. 12 m²</li>
+                        <li>C. 6 m²</li>
+                        <li>D. 5√2 m²</li>
+                     </ol>
+                     <p class="prompt"><strong>¡Aplica los 4 pasos de la Ruta!</strong> Identifica los datos de la figura, elige la estrategia/fórmula correcta para el área de un triángulo, ejecuta los cálculos y valida tu respuesta.</p>
+                      <!-- No se muestra la respuesta correcta aquí -->
+                 </div>
+
+                 <a href="#inicio" class="back-to-top" title="Volver al Inicio">↑</a>
+            </div></p> <a href="#inicio" class="back-to-top" title="Volver al Inicio">↑</a> </div> </section></p> <a href="#inicio" class="back-to-top" title="Volver al Inicio">↑</a> </div> </section>
+         <section id="area-soc" class="slide"> 
+                 <div class="section-image-placeholder"><p>(Imagen representativa de Sociales y Ciudadanas: Globo terráqueo, personas diversas, balanza justicia)</p></div>
+                 <h2>Área: Sociales y Ciudadanas 🌍</h2>
+                 <p>Analicemos contextos, perspectivas y argumentos usando la <strong>Ruta Clave para Sociales y Ciudadanas</strong>.</p>
+
+                <h3>La Ruta Social y Ciudadana: 4 Pasos</h3>
+                 <ol>
+                     <li><strong>PASO 1: DECODIFICACIÓN (Entender Contexto y Pregunta)</strong><br> Leer atentamente el texto/situación. Identificar tema central, actores involucrados, época/lugar (si aplica). Comprender la tarea específica de la pregunta.</li>
+                     <li><strong>PASO 2: CONEXIÓN Y ESTRATEGIA (Activar Saberes y Planificar)</strong><br> Conectar con conceptos sociales, políticos, económicos o históricos relevantes. Identificar perspectivas/intereses. Definir la estrategia (comparar, analizar causas, evaluar argumentos).</li>
+                     <li><strong>PASO 3: EJECUCIÓN Y EVALUACIÓN (Analizar Opciones)</strong><br> Aplicar la estrategia. Analizar CADA opción: ¿Se basa en la evidencia? ¿Considera todas las perspectivas? ¿Es coherente con los principios democráticos/constitucionales (si aplica)? Descartar opciones sesgadas, incompletas o irrelevantes.</li>
+                    <li><strong>PASO 4: VALIDACIÓN Y SELECCIÓN (Asegurar y Elegir)</strong><br> Verificar coherencia final. Elegir la opción que MEJOR responde a la pregunta, considerando el contexto y los principios relevantes.</li>
+                 </ol>
+
+                 <hr style="margin: 30px 0; border: 0; border-top: 1px solid #ccc;">
+
+                <h3>1. Modelado: Aplicando la Ruta Paso a Paso</h3>
+                 <p>Veamos cómo usar la ruta en una pregunta de Sociales:</p>
+                 <div class="example-question-container">
+                     <h4>Pregunta Modelo (Tomada de ICFES 2024 - Pregunta 73, Sesión 1)</h4>
+                      <p class="question-text"><strong>Contexto:</strong></p>
+                     <p>73. A continuación, se presentan apartes de dos constituciones políticas de Colombia:</p>
+                     <p><strong>Fragmento 1:</strong> "Se garantiza la libertad de cultos. Toda persona tiene derecho a profesar libremente su religión y a difundirla en forma individual o colectiva. Todas las confesiones religiosas e iglesias son igualmente libres ante la ley".</p>
+                     <p><strong>Fragmento 2:</strong> "En nombre de Dios, fuente suprema de toda autoridad, y con el fin de afianzar la unidad nacional [...] la religión católica, Apostólica, Romana es la de la nación: los poderes públicos la protegerán y harán que sea respetada, como esencial elemento del orden social".</p>
+                      <p><strong>Pregunta:</strong></p>
+                     <p><strong>A partir de la anterior información, y teniendo en cuenta sus conocimientos sobre la actual Constitución política, ¿cuál de las constituciones fue primero?</strong></p>
+                     <ol class="options">
+                         <li><strong>A. La del fragmento 2, porque menciona que en ese entonces el Estado negaba la existencia de diferentes creencias; en el fragmento 1 se protege y respeta la pluralidad.</strong> ✅</li>
+                         <li>B. La del fragmento 1, porque refleja un marco desactualizado en las normas que reglamentan las religiones en un Estado; en el fragmento 2 se corrige este factor de desorden institucional.</li>
+                         <li>C. La del fragmento 1, porque muestra la enorme influencia de la religión en las instituciones públicas de ese entonces; en el fragmento 2 se limita la participación de la Iglesia en una política más laica.</li>
+                        <li>D. La del fragmento 2, porque establece que el sentido del Estado es consolidar la unificación de una nación más moderna; en el fragmento 1 se privilegian las visiones religiosas de la política nacional.</li>
+                     </ol>
+                     <h4>Aplicando la Ruta Social y Ciudadana:</h4>
+                     <ol>
+                         <li><strong>PASO 1 (Decodificación):</strong> Comparar dos fragmentos constitucionales sobre religión. Pregunta: ¿Cuál fue PRIMERO?, basándome en la info y mis conocimientos de la Constitución ACTUAL.</li>
+                         <li><strong>PASO 2 (Conexión/Estrategia):</strong> Activar conocimiento: La Constitución ACTUAL de Colombia (1991) garantiza la libertad de cultos y la separación Iglesia-Estado (similar al Fragmento 1). Constituciones anteriores (como la de 1886) tenían una fuerte relación con la Iglesia Católica (similar al Fragmento 2). Plan: Identificar qué fragmento refleja la visión antigua y cuál la moderna, y justificar por qué.</li>
+                         <li><strong>PASO 3 (Ejecución/Evaluación):</strong>
+                            <ul>
+                                 <li>Fragmento 1: Libertad de cultos, igualdad, pluralidad (Moderno, post-1991).</li>
+                                 <li>Fragmento 2: Religión Católica como oficial, protegida por el Estado (Antiguo, pre-1991).</li>
+                                 <li>Evaluar Opciones:
+                                     <ul>
+                                         <li>A: Dice que F2 fue primero porque negaba pluralidad (correcto) y F1 la protege (correcto). COHERENTE.</li>
+                                         <li>B: Dice que F1 es desactualizado. Incorrecto, F1 es el marco actual. DESCARTADA.</li>
+                                        <li>C: Dice que F1 muestra influencia religiosa y F2 es más laico. Es al revés. DESCARTADA.</li>
+                                         <li>D: Dice que F2 busca unificación moderna y F1 privilegia visiones religiosas. Incorrecto, F1 es pluralista. DESCARTADA.</li>
+                                     </ul>
+                                 </li>
+                            </ul>
+                        </li>
+                         <li><strong>PASO 4 (Validación/Selección):</strong> La opción A es la única que identifica correctamente F2 como anterior (pre-1991) y F1 como posterior (actual), justificándolo con la diferencia clave (negación vs. protección de la pluralidad religiosa). ¡Elijo A!</li>
+                    </ol>
+                 </div>
+
+                 <hr style="margin: 30px 0; border: 0; border-top: 1px solid #ccc;">
+
+                <h3>2. Práctica Guiada: ¡Inténtalo tú con ayuda!</h3>
+                 <p>Ahora, aplica la ruta a esta pregunta. Te damos una guía inicial:</p>
+                 <div class="example-question-container">
+                     <h4>Pregunta Guiada (Tomada de ICFES 2024 - Pregunta 77, Sesión 1)</h4>
+                      <p class="question-text"><strong>Contexto:</strong></p>
+                     <p>77. "El respeto al derecho ajeno es la paz". Esta frase, atribuida al político mexicano Benito Juárez, revela una ideología liberal porque:</p>
+                     <ol class="options">
+                         <li>A. Muestra que la solidaridad entre las personas es la base de cualquier sociedad.</li>
+                         <li>B. Presenta los derechos individuales como un valor supremo que debe ser resguardado.</li>
+                         <li>C. Plantea que el interés colectivo está por encima de los derechos individuales.</li>
+                        <li>D. Concibe la violencia como una forma válida para resolver los conflictos entre individuos.</li>
+                     </ol>
+                      <div style="border: 2px solid var(--accent-color); padding: 10px; margin-top:15px; border-radius: 5px; background-color: #e6ffed;">
+                         <strong>Respuesta Correcta Estará Aquí:</strong> [ ] <!-- Placeholder Visual -->
+                     </div>
+                     <h4>Aplicando la Ruta (¡Tu turno!):</h4>
+                     <p class="prompt"><strong>Paso 1 (Decodificación):</strong> Frase: "El respeto al derecho ajeno es la paz". Pregunta: ¿Por qué esta frase revela una ideología LIBERAL?</p>
+                     <p class="prompt"><strong>Paso 2 (Conexión/Plan):</strong> ¿Qué caracteriza a la ideología LIBERAL (clásica)? Énfasis en los derechos INDIVIDUALES (vida, libertad, propiedad) como base de la sociedad y la paz. Plan: Buscar la opción que conecte la frase con este principio central del liberalismo.</p>
+                    <p class="prompt"><strong>Paso 3 (Ejecutar/Evaluar):</strong> Analiza cada opción:
+                         <ul>
+                             <li>A: Habla de solidaridad, no directamente del énfasis liberal en el derecho individual.</li>
+                            <li>B: Conecta "respeto al derecho ajeno" (individual) con un "valor supremo". ¿Coincide con el liberalismo?</li>
+                             <li>C: Habla de interés colectivo sobre individual. ¿Es eso liberalismo o más bien otra ideología?</li>
+                            <li>D: Habla de violencia. ¿La frase justifica la violencia?</li>
+                         </ul>
+                        Descarta las que no se alinean con la idea central del liberalismo.</p>
+                     <p class="prompt"><strong>Paso 4 (Asegurar/Elegir):</strong> ¿Qué opción explica MEJOR por qué la frase es LIBERAL? ¡Marca tu respuesta!</p>
+                 </div>
+
+                 <hr style="margin: 30px 0; border: 0; border-top: 1px solid #ccc;">
+
+                <h3>3. Práctica Independiente: ¡Ahora tú solo!</h3>
+                 <p>Aplica la Ruta Social y Ciudadana completa para resolver esta pregunta:</p>
+                  <div class="example-question-container">
+                     <h4>Pregunta Independiente (Tomada de ICFES 2024 - Pregunta 90, Sesión 1)</h4>
+                      <p class="question-text"><strong>Contexto:</strong></p>
+                     <p>90. En Colombia, tanto el matrimonio civil (ante juez o notario) como el religioso con efectos civiles protegen los derechos que surgen cuando dos personas conforman una familia, como el reconocimiento del vínculo familiar o los derechos sobre el patrimonio que consiguen. La Constitución política de Colombia, en su artículo 42, define el matrimonio como la unión entre un hombre y una mujer. Sin embargo, en el país también se realizan uniones de parejas del mismo sexo. Estas uniones también se consideran matrimonios civiles de acuerdo con una sentencia del año 2016, expedida por la Corte Constitucional. No obstante, la definición de matrimonio presente en la Constitución política no se modificó.</p>
+                       <p><strong>Pregunta:</strong></p>
+                     <p><strong>¿Puede modificarse la definición de matrimonio en la Constitución política de Colombia para que esta incluya las uniones de parejas del mismo sexo?</strong></p>
+                     <ol class="options">
+                        <li>A. No, porque en Colombia las normas establecidas en la Constitución no pueden modificarse para ese fin.</li>
+                         <li>B. No, porque el matrimonio religioso es la figura jurídica en Colombia que garantiza derechos a las parejas.</li>
+                         <li>C. Sí, porque el reconocimiento de parejas del mismo sexo garantizaría la sana convivencia entre estas.</li>
+                        <li>D. Sí, porque la Constitución puede modificarse para hacerla acorde con las transformaciones sociales.</li>
+                     </ol>
+                     <p class="prompt"><strong>¡Aplica los 4 pasos de la Ruta!</strong> Entiende el contexto (matrimonio, uniones mismo sexo, Constitución, sentencia). Conecta con tus conocimientos sobre cómo se modifica la Constitución y su adaptabilidad. Evalúa cada opción según la posibilidad de reforma constitucional y las razones dadas. Elige la mejor respuesta.</p>
+                      <!-- No se muestra la respuesta correcta aquí -->
+                 </div>
+
+                 <a href="#inicio" class="back-to-top" title="Volver al Inicio">↑</a>
+             </div></p> <a href="#inicio" class="back-to-top" title="Volver al Inicio">↑</a> </div> </section>
+         <section id="area-cnat" class="slide"> <div class="slide-content">                  <div class="section-image-placeholder"><p>(Imagen representativa de Ciencias Naturales: Microscopio, tubo de ensayo, átomo, planta)</p></div>
+                 <h2>Área: Ciencias Naturales 🔬</h2>
+                 <p>¡Es hora de pensar como científicos usando la <strong>Ruta del Explorador Científico</strong>!</p>
+
+                <h3>La Ruta del Explorador Científico: 4 Pasos</h3>
+                 <ol>
+                     <li><strong>PASO 1: DECODIFICACIÓN (Comprender Escenario y Pregunta)</strong><br> Leer/observar atentamente el fenómeno, experimento, modelo o situación (texto, gráfico, tabla, diagrama). Identificar tema, variables, condiciones. Entender la tarea específica.</li>
+                     <li><strong>PASO 2: CONEXIÓN CIENTÍFICA (Activar y Vincular Conocimiento)</strong><br> Activar conceptos, leyes, teorías o modelos (Biología, Química, Física) relevantes. Seleccionar la información científica precisa necesaria.</li>
+                     <li><strong>PASO 3: ANÁLISIS Y EVALUACIÓN (Aplicar Razonamiento y Juzgar Opciones)</strong><br> Aplicar el conocimiento (explicar, predecir, interpretar datos, calcular). Analizar CADA opción: ¿Es científicamente válida? ¿Contradice alguna ley? ¿Es una mala interpretación? Descartar errores y creencias comunes.</li>
+                    <li><strong>PASO 4: VALIDACIÓN Y SELECCIÓN (Confirmar y Elegir)</strong><br> Evaluar razonabilidad científica. Verificar coherencia con la evidencia. Comparar finalistas. Elegir la opción MEJOR fundamentada científica y lógicamente.</li>
+                 </ol>
+
+                 <hr style="margin: 30px 0; border: 0; border-top: 1px solid #ccc;">
+
+                <h3>1. Modelado: Aplicando la Ruta Paso a Paso</h3>
+                 <p>Veamos la ruta en acción con un ejemplo de Ciencias:</p>
+                 <div class="example-question-container">
+                     <h4>Pregunta Modelo (Tomada de ICFES 2024 - Pregunta 98, Sesión 1)</h4>
+                      <p class="question-text"><strong>Contexto:</strong></p>
+                     <p>98. Durante los inicios de la química moderna se consideraba al agua como un elemento. No fue hasta los experimentos de Lavoisier (1743 - 1794) que se le empezó a considerar como un compuesto. En estos experimentos Lavoisier tomó hidrógeno y lo mezcló con oxígeno, obteniendo una sustancia líquida que parecía ser agua.</p>
+                       <p><strong>Pregunta:</strong></p>
+                     <p><strong>¿Por qué estos experimentos llevaron a la conclusión de que el agua no era un elemento?</strong></p>
+                     <ol class="options">
+                        <li>A. Porque se demostró que el agua podía separarse en sustancias más sencillas.</li>
+                         <li>B. Porque se demostró que el agua podía obtenerse a partir de elementos.</li>
+                         <li><strong>C. Porque se demostró que el agua podía combinarse con otros elementos.</strong> ✅ </li>
+                         <li>D. Porque se demostró que el agua podía combinarse con otros compuestos.</li>
+                    </ol>
+                     <h4>Aplicando la Ruta del Explorador Científico:</h4>
+                     <ol>
+                         <li><strong>PASO 1 (Decodificación):</strong> Contexto: Antes agua=elemento, Lavoisier la consideró compuesto. Experimento: H + O -> Agua. Pregunta: ¿Por qué este experimento muestra que el agua NO es un elemento?</li>
+                         <li><strong>PASO 2 (Conexión Científica):</strong> Conceptos clave: Definición de Elemento (sustancia pura que no se puede descomponer en otras más simples por métodos químicos) y Compuesto (sustancia formada por la unión química de dos o más elementos diferentes). Experimento de Lavoisier = SÍNTESIS del agua a partir de H y O.</li>
+                        <li><strong>PASO 3 (Análisis/Evaluación):</strong> El experimento de Lavoisier mostró que el agua se *forma* a partir de dos sustancias diferentes (H y O), que sí son elementos. Por lo tanto, el agua no puede ser un elemento en sí misma, sino un compuesto.
+                            <ul>
+                                <li>A: Habla de separación (análisis), el experimento descrito es de formación (síntesis). Aunque cierto, no es lo que *este* experimento demostró. POSIBLE DISTRACTOR.</li>
+                                <li>B: El experimento demostró que se obtenía agua *a partir de* elementos (H y O). Esto implica que el agua está *compuesta* por ellos, ergo, no es un elemento. COHERENTE.</li>
+                                <li>C: El agua se combinó CON NADA en este experimento, se FORMÓ. Habla de combinación DEL agua. DESCARTADA.</li>
+                                <li>D: Similar a C, habla de combinación DEL agua. Además, H y O son elementos, no compuestos. DESCARTADA.</li>
+                            </ul>
+                         </li>
+                         <li><strong>PASO 4 (Validación/Selección):</strong> La opción B describe directamente la conclusión del experimento de SÍNTESIS de Lavoisier: si el agua se obtiene de elementos, no puede ser un elemento. Es la explicación más directa basada en la evidencia dada. (Aunque A es verdad sobre el agua, B se ajusta mejor al experimento descrito). ¡Elijo B! *(Nota: Revisando la pregunta 98 del PDF parece ser la B la correcta según la lógica, aunque tú la tenías marcada como C. Validar esta respuesta)*</li>
+                     </ol>
+                 </div>
+
+                 <hr style="margin: 30px 0; border: 0; border-top: 1px solid #ccc;">
+
+                <h3>2. Práctica Guiada: ¡Inténtalo tú con ayuda!</h3>
+                 <p>Ahora, aplica la ruta científica a esta pregunta. Te damos una guía:</p>
+                 <div class="example-question-container">
+                     <h4>Pregunta Guiada (Tomada de ICFES 2024 - Pregunta 102, Sesión 1)</h4>
+                      <p class="question-text"><strong>Contexto:</strong></p>
+                     <p>102. Una estudiante realiza un experimento para analizar la aceleración inicial de una burbuja de aire dentro de un tubo lleno de aceite, para diferentes ángulos de inclinación del tubo, como se muestra en la figura. Ella obtiene los siguientes resultados que se muestran en la tabla.</p>
+                       <img src="imagenp102.png" alt="Triángulo sombreado con dimensiones" style="max-width: 300px; display: block; margin: 10px auto;"> 
+                     <p><strong>Pregunta:</strong></p>
+                     <p><strong>Teniendo en cuenta la información anterior, ¿cómo será la aceleración inicial de la burbuja si el ángulo continúa aumentando?</strong></p>
+                     <ol class="options">
+                         <li>A. Menor, porque la fuerza gravitacional disminuye.</li>
+                         <li>B. Mayor, porque se aproximará a la aceleración gravitacional.</li>
+                         <li>C. Igual, porque la velocidad de la burbuja no cambia.</li>
+                        <li>D. No experimenta aceleración, porque esta se mantiene constante.</li>
+                    </ol>
+                      <div style="border: 2px solid var(--accent-color); padding: 10px; margin-top:15px; border-radius: 5px; background-color: #e6ffed;">
+                         <strong>Respuesta Correcta Estará Aquí:</strong> [ ] <!-- Placeholder Visual -->
+                     </div>
+                     <h4>Aplicando la Ruta (¡Tu turno!):</h4>
+                     <p class="prompt"><strong>Paso 1 (Decodificación):</strong> Experimento: Burbuja subiendo en aceite, varía ángulo del tubo. Datos: Tabla ángulo vs. aceleración inicial. Pregunta: ¿Qué pasará con la aceleración si el ángulo AUMENTA MÁS (ej. > 60°)?</p>
+                    <p class="prompt"><strong>Paso 2 (Conexión Científica):</strong> ¿Qué fuerzas actúan sobre la burbuja (Empuje, Peso, Viscosidad)? ¿Cómo afecta la inclinación del tubo a la componente del peso que se opone al movimiento o a la fuerza neta que causa la aceleración? ¿Qué pasa cuando el tubo está vertical (90°)? Concepto clave: Aceleración depende de fuerza neta.</p>
+                     <p class="prompt"><strong>Paso 3 (Análisis/Evaluación):</strong> Observa la tabla: A medida que el ángulo aumenta (30 -> 45 -> 60), la aceleración inicial también aumenta (5.0 -> 7.0 -> 8.8). Esto sugiere una tendencia. ¿Cuál es el límite físico? Cuando el tubo esté vertical (90°), la burbuja subirá lo más rápido posible (aceleración máxima, cercana a 'g' si no hubiera viscosidad). Analiza las opciones: ¿La fuerza gravitacional (peso) sobre la burbuja disminuye? ¿La velocidad es constante si hay aceleración? ¿La aceleración es cero?</p>
+                     <p class="prompt"><strong>Paso 4 (Validación/Selección):</strong> Según la tendencia y el límite físico (tubo vertical), ¿qué opción predice correctamente el comportamiento de la aceleración y lo justifica científicamente? ¡Marca tu respuesta!</p>
+                 </div>
+
+                 <hr style="margin: 30px 0; border: 0; border-top: 1px solid #ccc;">
+
+                <h3>3. Práctica Independiente: ¡Ahora tú solo!</h3>
+                 <p>Aplica la Ruta del Explorador Científico completa para resolver esta pregunta:</p>
+                  <div class="example-question-container">
+                     <h4>Pregunta Independiente (Tomada de ICFES 2024 - Pregunta 113, Sesión 1)</h4>
+                      <p class="question-text"><strong>Contexto:</strong></p>
+                     <p>113. En general, la materia se clasifica según la siguiente tabla.</p>
+                       <img src="imagenp113.png" alt="Triángulo sombreado con dimensiones" style="max-width: 300px; display: block; margin: 10px auto;"> 
+                     <p>Para la producción de un medicamento, se mezcla un principio activo (molécula con actividad biológica) con distintos excipientes (compuestos en forma sólida o líquida) que mejoran su distribución y liberación en el organismo. De acuerdo con la tabla, ¿cómo se clasifican el principio activo y los excipientes del medicamento?</p>
+                       <p><strong>Pregunta:</strong></p>
+                     <p><strong>¿Cómo se clasifican el principio activo y los excipientes del medicamento?</strong></p>
+                     <ol class="options">
+                        <li>A. Ambas son sustancias puras.</li>
+                         <li>B. Ambos son mezclas homogéneas.</li>
+                         <li>C. Ambos son mezclas heterogéneas.</li>
+                        <li>D. Ambos son elementos.</li>
+                     </ol>
+                     <p class="prompt"><strong>¡Aplica los 4 pasos de la Ruta!</strong> Decodifica la tabla y la situación. Conecta con las definiciones de elemento, compuesto, mezcla homogénea y heterogénea. Analiza la naturaleza del principio activo (molécula=compuesto?) y los excipientes (compuestos). ¿Qué resulta de mezclarlos? Evalúa las opciones y elige la clasificación correcta.</p>
+                      <!-- No se muestra la respuesta correcta aquí -->
+                 </div>
+
+                 <a href="#inicio" class="back-to-top" title="Volver al Inicio">↑</a>
+            </div></p> <a href="#inicio" class="back-to-top" title="Volver al Inicio">↑</a> </div> </section>
+
+        <!-- === FASE 4: Compartiendo Descubrimientos === -->
+        <section id="fase-socializacion" class="slide">
+            <div class="slide-content">
+                 <div class="section-image-placeholder"><p>(Imagen: Grupo diverso compartiendo ideas, bombillas encendidas)</p></div>
+                <h2>Compartiendo Descubrimientos 🤝</h2>
+                <p>¡Aprendamos juntos de las exploraciones de cada grupo!</p>
+                <h3>Puesta en Común (Guiada por Facilitador):</h3>
+                 <ul>
+                     <li>¿Qué pasos tiene la ruta de [Área X]? ¿Cuál fue el más retador?</li>
+                     <li>¿Cómo aplicaron el Paso [Y] a su pregunta?</li>
+                     <li><strong>Aprendizaje Clave:</strong> La RUTA organiza el pensamiento, ayuda a detectar "trampas" (distractores) y a conectar lo que ya sabemos. ¡Se mejora con la PRÁCTICA!</li>
+                 </ul>
+                <a href="#inicio" class="back-to-top" title="Volver al Inicio">↑</a>
+            </div>
+        </section>
+
+         <!-- === FASE 5: Inglés (Tips por Tarea) === -->
+         <section id="fase-ingles" class="slide">
+             <div class="slide-content">
+                 <div class="section-image-placeholder"><p>(Imagen: Banderas UK/USA, iconos de conversación, lectura en inglés, las 7 partes)</p></div>
+                 <h2>Inglés: ¡Estrategias Rápidas por Tarea!</h2>
+                 <p>Inglés tiene 7 partes distintas. La clave es: <strong>¡Entender la TAREA específica + Estrategia RÁPIDA para cada parte!</strong></p>
+
+                 <h4>Parte 1: Vocabulario (Relacionar Descripción - Palabra)</h4>
+                 <p><strong>Tarea:</strong> Leer 5 descripciones y encontrar la palabra correcta (de 8 opciones A-H) para cada una.</p>
+                 <p><strong>Estrategia:</strong> Lee la descripción -> Identifica <strong>Palabras Clave</strong> -> Escanea las opciones (A-H) buscando la que mejor encaja semánticamente.</p>
+                 <div class="example-question-container">
+                    <h5>Ejemplo (Basado en Pregunta 80, Sesión 2):</h5>
+                    <p><strong>Descripción 80:</strong> Rabbits like this long orange vegetable.</p>
+                    <p><strong>Opciones:</strong> A. candy, B. carrot, C. chicken...</p>
+                    <p class="prompt">Palabra clave: "long orange vegetable", "Rabbits like". Opción obvia: B. carrot.</p>
+                 </div>
+
+                 <h4>Parte 2: Avisos (Entender Propósito y Lugar)</h4>
+                 <p><strong>Tarea:</strong> Leer 5 avisos cortos y decidir dónde los verías (3 opciones A, B, C por aviso).</p>
+                 <p><strong>Estrategia:</strong> Lee el aviso -> ¿Cuál es el <strong>propósito/mensaje principal</strong>? -> Piensa en <strong>contextos lógicos</strong> -> Elige la opción de lugar más probable.</p>
+                  <div class="example-question-container">
+                    <h5>Ejemplo (Basado en Pregunta 85, Sesión 2):</h5>
+                    <p><strong>Aviso 85:</strong> Try our great chocolate apple pie!</p>
+                    <p><strong>Opciones:</strong> A. in a toy shop, B. in a clothes shop, C. in a cake shop.</p>
+                    <p class="prompt">Propósito: Vender pastel. Lugar lógico: C. in a cake shop.</p>
+                 </div>
+
+                 <h4>Parte 3: Conversaciones (Completar Diálogos)</h4>
+                 <p><strong>Tarea:</strong> Leer 5 conversaciones cortas y elegir la respuesta/intervención correcta (A, B o C) para completar el diálogo.</p>
+                 <p><strong>Estrategia:</strong> Lee TODA la conversación -> Entiende el <strong>contexto y el turno que falta</strong> -> Elige la opción que sea una <strong>respuesta/pregunta coherente y natural</strong>.</p>
+                  <div class="example-question-container">
+                    <h5>Ejemplo (Basado en Pregunta 90, Sesión 2):</h5>
+                    <p><strong>Diálogo 90:</strong> Speaker 1: Can you hold the camera? <br> Speaker 2: ______</p>
+                    <p><strong>Opciones:</strong> A. That's quick!, B. Of course., C. May I keep this?</p>
+                    <p class="prompt">Contexto: Petición. Respuesta coherente: B. Of course.</p>
+                 </div>
+
+                 <h4>Parte 4: Texto con Espacios (Gramática)</h4>
+                 <p><strong>Tarea:</strong> Leer un texto con 8 espacios y elegir la palabra correcta (A, B o C) para cada espacio.</p>
+                 <p><strong>Estrategia:</strong> Lee la frase alrededor del espacio -> Identifica <strong>qué tipo de palabra falta</strong> (verbo, sustantivo, preposición, adjetivo, conector...) y qué <strong>forma gramatical</strong> necesita (tiempo verbal, singular/plural, etc.) -> Elige la opción que encaja gramaticalmente Y tiene sentido.</p>
+                 <div class="example-question-container">
+                    <h5>Ejemplo (Basado en Pregunta 95, Sesión 2):</h5>
+                    <p><strong>Texto:</strong> One of America's top shows will have no elephants (0) ___ stage in a few years. [...] People (96) ___ use it to protect them.</p>
+                    <p><strong>95. Opciones:</strong> A. on, B. in, C. at.</p>
+                     <p class="prompt">Contexto: Elephants ... stage. Preposición correcta para 'stage': A. on.</p>
+                    <!-- (Añadir ejemplo para la 96 si se desea) -->
+                 </div>
+
+                 <h4>Parte 5: Comprensión Lectora Literal</h4>
+                 <p><strong>Tarea:</strong> Leer un texto y responder 7 preguntas de selección múltiple (A, B o C) sobre información explícita.</p>
+                 <p><strong>Estrategia: ¡LEER LAS PREGUNTAS PRIMERO!</strong> -> Identifica palabras clave en la pregunta -> <strong>Escanea el texto</strong> buscando esas palabras o sinónimos -> Lee la frase/párrafo donde está la información -> Elige la opción que coincide con lo que dice el texto.</p>
+                  <div class="example-question-container">
+                    <h5>Ejemplo (Basado en Pregunta 103, Sesión 2):</h5>
+                     <!-- *** SUGERENCIA: Mostrar el texto del festival Songkran y la pregunta 103 *** -->
+                    <p><strong>Pregunta 103:</strong> One of the activities people do in the festival is to</p>
+                    <p><strong>Opciones:</strong> A. visit their families, B. play without their kids, C. get a new job.</p>
+                    <p class="prompt">Estrategia: Buscar "activities" o verbos de acción en el texto. El texto dice "...they spend time with their parents...". Opción A.</p>
+                 </div>
+
+                <h4>Parte 6: Comprensión Lectora Inferencial/General</h4>
+                 <p><strong>Tarea:</strong> Leer un texto y responder 5 preguntas (A, B, C o D) sobre la idea principal, propósito del autor, inferencias, significado de palabras en contexto.</p>
+                 <p><strong>Estrategia: ¡LEER LAS PREGUNTAS PRIMERO!</strong> -> Entender qué tipo de pregunta es (idea principal, inferencia...) -> Leer el texto buscando la <strong>idea general</strong> o la información relevante para inferir -> Evaluar opciones: ¿Cuál refleja mejor el propósito/idea? ¿Cuál se deduce lógicamente?.</p>
+                  <div class="example-question-container">
+                    <h5>Ejemplo (Basado en Pregunta 110, Sesión 2):</h5>
+                     <!-- *** SUGERENCIA: Mostrar el texto "Fitness and health" y la pregunta 110 *** -->
+                    <p><strong>Pregunta 110:</strong> What is the purpose of the writer in this article?</p>
+                    <p><strong>Opciones:</strong> A. to describe a suitable exercise routine..., B. to provide several recipes..., C. to inform about the awful effects..., D. to explain that being in good shape doesn't mean you won't need medicine.</p>
+                    <p class="prompt">Estrategia: Leer el texto buscando la intención general. Habla de la diferencia entre verse bien y estar sano, importancia del ejercicio, dieta, etc. La opción D parece reflejar mejor el mensaje central sobre salud holística. (Validar respuesta)</p>
+                 </div>
+
+                 <h4>Parte 7: Texto con Espacios (Léxico y Gramática)</h4>
+                <p><strong>Tarea:</strong> Leer un texto con 10 espacios y elegir la palabra correcta (A, B, C o D) para cada uno.</p>
+                <p><strong>Estrategia:</strong> Similar a Parte 4, pero con más opciones y a veces enfocado más en el <strong>vocabulario adecuado al contexto</strong>. Lee alrededor del espacio -> ¿Qué tipo de palabra Y qué significado encaja mejor? -> Elige la opción correcta.</p>
+                  <div class="example-question-container">
+                    <h5>Ejemplo (Basado en Pregunta 115, Sesión 2):</h5>
+                     <!-- *** SUGERENCIA: Mostrar el texto "Chili peppers" y la pregunta 115 *** -->
+                    <p><strong>Texto:</strong> Chili peppers are the fruit of pepper plants. You might be surprised if you found out people have been eating them for a (0) ___ of years. In (115) ___, they have been part of the human...</p>
+                    <p><strong>115. Opciones:</strong> A. time, B. fact, C. order, D. advance.</p>
+                     <p class="prompt">Contexto: "In ___ , they have been part...". Necesitamos una palabra que indique realidad o verdad. Opción B. fact ("In fact...").</p>
+                 </div>
+
+                 <a href="#inicio" class="back-to-top" title="Volver al Inicio">↑</a>
+             </div>
+         </section></p>
+                 <a href="#inicio" class="back-to-top" title="Volver al Inicio">↑</a>
+             </div>
+         </section>
+
+        <!-- === FASE 6: La Meta === -->
+         <section id="la-meta" class="slide final-slide">
+                        <!-- No necesita placeholder de imagen, ya que es la sección final con estilo propio -->
+            <div class="welcome-content-container"> <!-- Reutilizando estilo similar al inicio -->
+                 <h2>¡La Meta: Tu Mejor Versión en Saber 11! 🏆</h2>
+
+                 <h3>¡La Clave es PRACTICAR la Ruta! 🏋️‍♀️</h3>
+                 <p>Ya conoces las herramientas y las estrategias. Ahora, el secreto es usarlas constantemente en tu preparación.</p>
+                 <p><strong>Tu Compromiso:</strong> ¡Aplica los 4 Pasos (o las estrategias de Inglés) en cada ejercicio y simulacro que realices!</p>
+
+                 <h3>¡Controla los Nervios, Confía en tu Plan! 😎</h3>
+                 <p>Sentir nervios es normal, pero la preparación te da el control.</p>
+                 <ol>
+                     <li><strong>Confía en tu Método:</strong> ¡Ya tienes una Ruta!</li>
+                     <li><strong>Prepárate Bien:</strong> Descansa, organiza tus materiales (lápiz No.2, borrador, tajalápiz, ID).</li>
+                     <li><strong>Actitud Positiva:</strong> ¡Cree en tu potencial y en tu esfuerzo!</li>
+                 </ol>
+
+                 <h3>Tu Caja de Herramientas 🛠️</h3>
+                 <p><strong>La Ruta de 4 Pasos + Estrategias Clave de Inglés + Tu Práctica Constante = ¡ÉXITO SEGURO!</strong></p>
+                 <p>Recuerda los recursos y apoyo de <strong>Grupo Edúcate Colombia</strong>.</p>
+
+                <p><strong>¡Estamos seguros de que alcanzarás tus metas! ¡Mucho éxito en tu prueba Saber 11!</strong></p>
+                 <!-- *** SUGERENCIA: Logo Grupo Educate Colombia *** -->
+            </div>
+        </section>
+        </section>
+    </main>
+
+    <footer id="main-footer">
+        <!-- *** SUGERENCIA: Colocar aquí el LOGO oficial (versión pequeña o alternativa si es necesario) *** -->
+        <div class="footer-logo-placeholder">(Logo Grupo Edúcate)</div>
+        <p><strong>Autor:</strong> Marlon Galvis Villa - Departamento de Pedagogía, Grupo Edúcate Colombia.</p>
+        <p>Taller Estratégico Saber 11 - Potenciado por Grupo Edúcate Colombia.</p>
+    </footer>
+
+</body>
+</html>
